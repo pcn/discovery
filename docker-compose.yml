@@ -1,0 +1,25 @@
+version: '3'
+services:
+    discovery:
+        image: discovery:unstable
+        build:
+            dockerfile: Dockerfile
+            context: .
+        entrypoint:
+          - python
+          - wsgi.py
+        ports:
+            - 17629:17629
+        environment:
+            - HOST_TTL=10
+            - BACKEND_STORAGE=DynamoDB
+            - CACHE_TYPE=null
+            - APPLICATION_DIR=/root/discovery
+            - APPLICATION_ENV=vagrant
+            - DEBUG=true
+            - LOG_LEVEL=DEBUG
+            - PORT=17629
+            - DYNAMODB_TABLE_HOSTS=pcn-hosts-table
+            - DYNAMODB_CREATE_TABLES_IN_APP=true
+        security_opt:
+            - seccomp:unconfined
