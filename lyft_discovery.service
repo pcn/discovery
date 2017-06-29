@@ -1,0 +1,10 @@
+[Unit]
+Description=Lyft service discovery (via DynamoDB) service
+After=network.target
+
+[Service]
+ExecStart=/home/ubuntu/discovery/run-in-virtualenv.sh
+Type=simple
+
+[Install]
+WantedBy=default.target
