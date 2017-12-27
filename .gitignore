@@ -12,7 +12,6 @@ dist
 build
 eggs
 parts
-bin
 var
 sdist
 develop-eggs
@@ -51,3 +50,6 @@ app/public/styles/*.css
 .DS_store
 .zedstate
 .idea
+
+# Bazel build artifacts
+bazel-*
