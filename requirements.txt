@@ -54,7 +54,8 @@ blinker==1.4
 # Upstream url: http://gunicorn.org
 gunicorn==19.1.1
 
-# bump, per https://github.com/lyft/discovery/pull/29
+# For a while we bumped this; per https://github.com/lyft/discovery/pull/29
+# How is it now?
 gevent==1.0.2
 greenlet==0.4.4
 
@@ -64,5 +65,5 @@ flake8==2.4.0
 nose==1.3.4
 mock==2.0.0
 
-pynamodb==1.5.2
+pynamodb==3.2.1
 statsd==3.2.1
