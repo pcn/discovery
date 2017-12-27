@@ -127,3 +127,47 @@ py_image(
     base = ":dependencies_in_image",
 )
 
+
+# Build a .deb of the discovery service
+
+load("@bazel_tools//tools/build_defs/pkg:pkg.bzl", "pkg_tar", "pkg_deb")
+
+pkg_tar(
+    name = "discovery-gunicorn-libs",
+    strip_prefix = "/",
+    package_dir = "/opt/lyft-discovery/lib", 
+    srcs = SOURCES + PIP_DEPS + BUILD_DEPS,
+    mode = "0644",
+)
+
+pkg_tar(
+    name = "discovery-gunicorn-bin",
+    strip_prefix = "/",
+    package_dir = "/opt/lyft-discovery/bin", 
+    srcs = ["bin/run_gunicorn.py"],
+    mode = "0755",
+)
+
+pkg_tar(
+    name = "discovery-debian-data",
+    extension = ".tar.gz",
+    deps = [":discovery-gunicorn-libs", ":discovery-gunicorn-bin"],
+)
+
+
+pkg_deb(
+    name = "discovery_debian",
+    architecture = "amd64",
+    built_using = "bazel",
+    data = "//:discovery-debian-data",
+    depends = [
+        "python",
+    ],
+    # description_file = "debian/description",
+    description = "Lyft discovery service for use with envoy",
+    homepage = "https://github.com/lyft/discovery",
+    maintainer = "Lyft (packaged by https://github.com/pcn)",
+    package = "lyft-discovery",
+    version = "0.0.1",
+)
+
