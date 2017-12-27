@@ -1,6 +1,6 @@
 #!/bin/sh
 echo BUILD_DATE $(TZ=Etc/UTC date -Iseconds)
-# XXX: change the below to using describe, if possible, to get most recent tag and offset instead
+# Use describe, if possible, to get most recent tag and offset instead
 # of having to construct that kind of info from pieces
 echo BUILD_SCM_HASH $(git rev-parse HEAD)
 echo BUILD_SCM_VERSION $(git describe)-$USER
